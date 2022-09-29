@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio8</title>
+</head>
+
+<body>
+    <script>
+        var arr = []; // Arreglo para llenar
+        var cantidadNumeros = 101; // Cantidad de números en el arreglo
+        var hasta = 102; // Máximo valor de los números en el arreglo
+         /*
+         * Bucle para llenar el arreglo con la cantidad que necesites
+         */
+         while (arr.length < cantidadNumeros && cantidadNumeros < hasta) {
+            llenarAleatorios(arr);
+        }
+        function llenarAleatorios(a) {
+            var v = Math.floor(Math.random() * hasta);
+            if (!a.some(function (e) { return e == v })) {
+                /** 
+                 * Si no se encuentra el valor aleatorio en el arreglo
+                 * se pushea el valor.
+                 */
+                a.push(v);
+            }
+        }
+     
+
+        for (i = 0; i < arr.length; i++) {
+            document.write(arr[i]+", ")
+
+
+        }
+    </script>
+</body>
+
+</html>

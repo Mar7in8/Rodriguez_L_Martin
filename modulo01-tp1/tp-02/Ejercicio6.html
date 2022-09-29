@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio6</title>
+</head>
+
+<body>
+    <script>
+        var palabra = prompt("ingresa una palabra")
+        var palabrasinEsp = palabra.split('');
+        let vocalEnc = encontrarVocal(palabrasinEsp)
+        alert(`La primera vocal de ${palabra} es: ${vocalEnc}`)
+
+        function encontrarVocal(string) {
+            let vocales = 'aeiouAEIOU';
+            for (let i = 0; i < string.length; i++) {
+                if (vocales.indexOf(string[i]) !== -1) {
+                    return string[i];      
+                }
+            }
+         
+        }
+
+       
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio4</title>
+</head>
+
+<body>
+    <script>
+      num = prompt("ingresa un numero para saber si es par o impar")
+      if (num%2 == 0) {
+           alert(`el numero ${num} es par`)
+        }else{
+            alert(`el numero ${num} es impar`)
+        }  
+    </script>
+</body>
+
+<script>
+    var palabra = prompt("ingresa una palabra")
+    var palabrasinEsp = palabra.split('');
+    var upperCount = 0;
+    var lowerCount = 0;
+    palabrasinEsp.forEach(function (cadena) {
+        if (cadena == cadena.toUpperCase()) {
+            upperCount++;
+        }
+        if (cadena == cadena.toLowerCase()) {
+            lowerCount++;
+        }
+    });
+    if (upperCount > 0 && lowerCount == 0)
+        alert(`La palabra ${palabra} esta formada por mayúsculas`);
+    else if (lowerCount > 0 && upperCount == 0)
+        alert(`La palabra ${palabra} esta formada por minúsculas`);
+    else
+        alert(`La palabra ${palabra} esta formada por mayúsculas y minúsculas`);
+</script>

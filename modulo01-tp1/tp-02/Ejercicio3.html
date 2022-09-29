@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio3</title>
+</head>
+
+<body>
+    <script>
+      num = prompt("ingresa un numero para sacar el factorial")
+      let fac = factorial(num);
+      alert(`el factorial de ${num} es ${fac}`);
+
+       function factorial(n) {
+            var fact = 1;
+            for (i = 1; i <= n; i++) {
+                fact = fact * i;
+            }
+            return fact;
+        }
+    </script>
+</body>

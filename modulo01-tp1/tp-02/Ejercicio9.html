@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+</head>
+
+<body>
+    <script>
+        let notas = [2];
+        let cont = 0
+        alert("Ingresa las 3 notas del alumno")
+        while (cont < 3) {       
+            let notalum = prompt("ingresa la nota del alumno")
+            if (notalum <= 10 && notalum >= 0) {
+                notas[cont] = parseInt(notalum)
+                cont++;
+            } else {
+                alert("Ingresa una nota correcta")
+            }
+        }
+
+        let res = notas[0] + notas[1] + notas[2]
+        nota = res / 3
+        alert(nota)
+        ejercicionotaalumno(nota);
+        function ejercicionotaalumno(nota) {
+            if (nota <= 10 && nota > 0) {
+                if (nota >= 8) {
+                    alert("Sobresaliente!")
+                } else
+                    if (nota <= 7 && nota >= 6) {
+                        alert("Aprobado!")
+                    } else {
+                        if (nota <= 5) {
+                            alert("Reprobado!")
+                        }
+                    }
+            } else {
+                alert("Ingrese las notas correctametne")
+            }
+        }
+
+    </script>
+</body>
+
+</html>
