@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `Localidad` (
   `idProvincia` INT NOT NULL,  
 	PRIMARY KEY (`idLocalidad`),
     FOREIGN KEY (`idProvincia`)
-    REFERENCES `Pais` (`Provincia`));
+    REFERENCES `Provincia` (`idProvincia`));
 
 
 -- -------------------------------------------------------------------------------------------------------------------------------
@@ -133,11 +133,11 @@ insert into provincia (NombreProvincia,Pais_idPais) values("Punta del este",05);
 
 -- AGREGAR 5 VALORES A TABLA LOCALIDAD 
 
-insert into localidad (NombreLocalidad,Pais_idPais,idProvincia) values("Posadas",01,01);
-insert into localidad (NombreLocalidad,Pais_idPais,idProvincia) values("praia",02,02);
-insert into localidad (NombreLocalidad,Pais_idPais,idProvincia) values("intoki",03,03);
-insert into localidad (NombreLocalidad,Pais_idPais,idProvincia) Values("cañantida",04,04);
-insert into localidad (NombreLocalidad,Pais_idPais,idProvincia) values("el este",05,05);
+insert into localidad (NombreLocalidad,idProvincia) values("Posadas",01);
+insert into localidad (NombreLocalidad,idProvincia) values("praia",02);
+insert into localidad (NombreLocalidad,idProvincia) values("intoki",03);
+insert into localidad (NombreLocalidad,idProvincia) Values("cañantida",04);
+insert into localidad (NombreLocalidad,idProvincia) values("el este",05);
 
 
 -- AGREGAR 5 VALORES A TABLA DEPARTAMENTOS
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `Provedores` (
   `idProvedores` INT NOT NULL AUTO_INCREMENT,
   `razonSocial` VARCHAR(25) NULL,
   `nombreProvedores` VARCHAR(25),
-  `apellidoProvedores` INT NOT NULL,
+  `apellidoProvedores` VARCHAR(25),
   `naturaleza` VARCHAR(25),
   `cuitProvedores` int unique,
   `idLocalidad_fk` int,
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `Productos` (
   `tmsProducto` timestamp,
    PRIMARY KEY (`idProducto`),
    FOREIGN KEY (`idMarca_fk`)
-   REFERENCES `Marca` (`idMarca`));
+   REFERENCES `marcas` (`idMarca`));
    
 
 CREATE TABLE IF NOT EXISTS `Cajas`(
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `Marcas` (
   `tmsMarcas` timestamp,
    PRIMARY KEY (`idMarca`),
    FOREIGN KEY (`idProvedor`)
-   REFERENCES `Productos` (`idProducto`));
+   REFERENCES `provedores` (`idProvedores`));
     
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -237,20 +237,9 @@ SET FOREIGN_KEY_CHECKS = 1;
 7. Insertar 5 registros en cada tabla del punto 6. Tener en cuenta que el script debe ejecutarse
 secuencialmente y no fallar.
 */
-insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-16 13:00:00','2022-11-16 18:00:00',1,sysdate());
-insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-17 13:00:00','2022-11-17 18:00:00',0,sysdate());
-insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-19 13:00:00','2022-11-19 18:00:00',1,sysdate());
-insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-18 12:30:00','2022-11-18 17:00:00',1,sysdate());
-insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-20 07:00:00','2022-11-20 12:30:00',0,sysdate());
-
-insert into Marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Coca Cola","Marca de bebidas",1,1,sysdate());
-insert into Marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Doritos","Los Mejores Snack",5,1,sysdate());
-insert into Marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Milka","Chocolates mas ricos del mundo",4,0,sysdate());
-insert into Marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Arcor","Productos de primera calidad",3,1,sysdate());
-insert into Marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Pepsi","Las Mejores Bebidas son pepsi",2,1,sysdate());
 
 insert into provedores (razonSocial,nombreProvedores,apellidoProvedores,naturaleza,cuitProvedores,idLocalidad_fk,estadoProvedores,tmsProvedores)
-values ("Coca Cola Corp.","Juan","Contreras","Fisica",52-54752156-3,1,1,sysdate());
+values ("Coca Cola Corp.","Juan","Contrerprovedoresas","Fisica",52-54752156-3,1,1,sysdate());
 insert into provedores (razonSocial,nombreProvedores,apellidoProvedores,naturaleza,cuitProvedores,idLocalidad_fk,estadoProvedores,tmsProvedores)
 values ("Doritos Corp.","Lucas","Alvarez","Fisica",52-45528452-3,5,0,sysdate());
 insert into provedores (razonSocial,nombreProvedores,apellidoProvedores,naturaleza,cuitProvedores,idLocalidad_fk,estadoProvedores,tmsProvedores)
@@ -259,6 +248,18 @@ insert into provedores (razonSocial,nombreProvedores,apellidoProvedores,naturale
 values ("Arcor. Corp.","Franco","Rodriguez","Fisica",45-58452154-4,3,0,sysdate());
 insert into provedores (razonSocial,nombreProvedores,apellidoProvedores,naturaleza,cuitProvedores,idLocalidad_fk,estadoProvedores,tmsProvedores)
 values ("Pepsi Corp.","Martin","Gauna","Juridica",22-54853215-5,2,1,sysdate());
+
+insert into marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Coca Cola","Marca de bebidas",1,1,sysdate());
+insert into marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Doritos","Los Mejores Snack",5,1,sysdate());
+insert into marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Milka","Chocolates mas ricos del mundo",4,0,sysdate());
+insert into marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Arcor","Productos de primera calidad",3,1,sysdate());
+insert into marcas (nombreMarca,descripcionMarca,idProvedor,estado,tmsMarcas) values ("Pepsi","Las Mejores Bebidas son pepsi",2,1,sysdate());
+
+insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-16 13:00:00','2022-11-16 18:00:00',1,sysdate());
+insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-17 13:00:00','2022-11-17 18:00:00',0,sysdate());
+insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-19 13:00:00','2022-11-19 18:00:00',1,sysdate());
+insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-18 12:30:00','2022-11-18 17:00:00',1,sysdate());
+insert into Cajas (horaInicio,HoraCierre,estadoCajas,tmsCajas) values ('2022-11-20 07:00:00','2022-11-20 12:30:00',0,sysdate());
 
 insert into Productos (nombreProducto,descripcionProducto ,idMarca_fk,stock  ,precioProducto ,estadoProducto,tmsProducto)
 values ("Coca Cola","envase de 1LTS",1,400,450,1,sysdate());
@@ -269,7 +270,7 @@ values ("Milka","envase de 1LTS",1,400,450,1,sysdate());
 insert into Productos (nombreProducto,descripcionProducto ,idMarca_fk,stock  ,precioProducto ,estadoProducto,tmsProducto)
 values ("Galletita Arcor","Calle 500g neto",3,200,250,1,sysdate());
 insert into Productos (nombreProducto,descripcionProducto ,idMarca_fk,stock  ,precioProducto ,estadoProducto,tmsProducto)
- values ("Pepsi","envase de 1.5LTS",2,150,300,1,sysdate());
+values ("Pepsi","envase de 1.5LTS",2,150,300,1,sysdate());
  
  -- -------------------------------------------------------------------------------------------------------------------------------------
 
@@ -324,14 +325,11 @@ insert into vendedores (nombre,apellido,cuitcuil,comisión) values ("Pablo","Esc
  add estado boolean,
  add tipo_movimiento varchar(25);
  
- 
-
   -- -------------------------------------------------------------------------------------------------------------------------------------
 
  /*13. Insertar 5 movimientos distintos.*/
  
  -- AGREGAR CLIENTES ---
-
 
 
  insert into clientes (nombre,apellido,cuitcuil,ciudad,categoría) values ("Romero","Trivia",'3-251548-2','Posadas',1);
@@ -357,7 +355,66 @@ UPDATE movimientos
 SET estado = 0
 WHERE movimientos.id=1 or movimientos.id=2;
 
+-- -------------------------------------------------------------------------------------------------
 
+/*
+15. Modificar el campo stock de la tabla productos teniendo en cuenta la cantidad de la tabla
+de movimientos. Sumar el stock si es un ingreso, restar si es un egreso. Esto hacerlo de
+manera manual en base los 5 movimientos insertados en el punto 13. Es decir deben haber
+5 updates de la tabla producto.
+*/
+
+  update productos
+	  join movimientos
+	  on productos.idProducto=movimientos.idproducto_fk
+	  set stock= stock - movimientos.cantidad where tipo_movimiento = "egreso";
+
+ update productos
+	  join movimientos
+	  on productos.idProducto=movimientos.idproducto_fk
+	  set stock= stock + movimientos.cantidad where tipo_movimiento = "ingreso";
+
+
+-- -------------------------------------------------------------------------------------
+ /*
+ 16. Crear la tabla parametros (id, tms,cosas(json), id_usuario)
+ */
  
- 
- 
+ CREATE TABLE IF NOT EXISTS `parametros` (
+  `idParametros` INT NOT NULL AUTO_INCREMENT,
+  `idUsuario` INT NOT NULL,
+  `tmsParametros` timestamp,
+  `cosas` json default null,
+   PRIMARY KEY (`idParametros`));
+   
+-- -------------------------------------------------------------------------------------
+
+ /*17. Insertar en la tabla parametros teniendo en cuenta la columna cosas:
+●{"idDeLaCosa": 101, "permisos": "PUT, GET"}
+●{"vistasPermitidas":"menuPrincipal,menuSecundario,ventas,estadisticaVentas,listaCliente",
+“grupo": "ventas"}
+●{"zonaHoraria": "America/Argentina/BuenosAires"}
+●{"fechaInicioActividades": 01/01/2019, "mesAperturaCaja": "Enero", "mesCierreCaja":
+"Diciembre"}
+●{"balancesAniosAnteriores": {"2019": {"ingreso": "7374901.93","egreso":
+"3732538,75"},"2020":{"ingreso": "27442665,12","egreso": "8522331,82"},"2021": {"ingreso":
+"31634912,57","egreso": "9757142,66"}}}
+Nota: Rellenar a criterio los campos id, tms,id_usuario
+*/
+
+insert parametros (idUsuario,tmsParametros,cosas) values (1,sysdate(),'{"idDeLaCosa": 101, "permisos": "PUT, GET"}');
+
+insert parametros (idUsuario,tmsParametros,cosas) values (2,sysdate(),'{
+	"vistasPermitidas": ["menuPrincipal", "menuSecundario", "ventas", "estadisticaVentas", "listaCliente"], "grupo": "ventas"}');
+
+insert parametros (idUsuario,tmsParametros,cosas) values (3,sysdate(),'{"zonaHoraria": "America/Argentina/BuenosAires"}');
+
+insert parametros (idUsuario,tmsParametros,cosas) values (4,sysdate(),'{"fechaInicioActividades": "01/01/2019", "mesAperturaCaja": "Enero", "mesCierreCaja":
+"Diciembre"}');
+
+insert parametros (idUsuario,tmsParametros,cosas) values (5,sysdate(),'{"balancesAniosAnteriores": {"2019": {"ingreso": "7374901.93","egreso":
+"3732538,75"},"2020":{"ingreso": "27442665,12","egreso": "8522331,82"},"2021": {"ingreso":
+"31634912,57","egreso": "9757142,66"}}}');
+
+
+
