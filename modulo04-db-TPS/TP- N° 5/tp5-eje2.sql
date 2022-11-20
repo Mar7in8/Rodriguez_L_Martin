@@ -137,30 +137,38 @@
     
     
 -- 25.Calcula el número total de vendedores distintos que aparecen en la tabla pedido.
-
-	-- -----------------------select distinct count(vendedores.nombre) as 'Total Vendedores' from vendedores 
-  --                 left join pedidos on vendedores.id=pedidos.id_vendedor where vendedores.id=pedidos.id_vendedor group by id_vendedor;
     
+	select  count(distinct pedidos.id_vendedor) as 'vendedores' from vendedores left join pedidos 
+	on pedidos.id_vendedor=vendedores.id
+	where pedidos.id is not null;
     
 -- 26.Calcula el número total de clientes que aparecen en la tabla cliente.
 	
     select count(id) as 'Total clientes' from clientes;
 
 -- 27.Calcula cuál es la mayor cantidad que aparece en la tabla pedido.
-
-
-
+	
+    select max(cantidad) as 'cantidad min' 
+	from pedidos;
+		
 
 -- 28.Calcula cuál es la menor cantidad que aparece en la tabla pedido.
 
+	select min(cantidad) as 'cantidad min' 
+	from pedidos;
 
 -- 29.Calcula cuál es el valor máximo de categoría para cada una de las ciudades que aparece en la
 -- tabla cliente.
+
+	select ciudad, max(categoría) from clientes group by clientes.id;
+    
 -- 30.Calcula cuál es el máximo valor de los pedidos realizados durante el mismo día para cada uno
 -- de los clientes. Es decir, el mismo cliente puede haber realizado varios pedidos de diferentes
 -- cantidades el mismo día. Se pide que se calcule cuál es el pedido de máximo valor para cada
 -- uno de los días en los que un cliente ha realizado un pedido. Muestra el identificador del
 -- cliente, nombre, apellido, la fecha y el valor de la cantidad.
+
+	select * 
 -- 31.Calcula cuál es el máximo valor de los pedidos realizados durante el mismo día para cada uno
 -- de los clientes, teniendo en cuenta que sólo queremos mostrar aquellos pedidos que superen
 -- la cantidad de $2000 .
